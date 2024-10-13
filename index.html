@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <nav aria-label="Main navigation">
             <div class="menu-toggle">
@@ -19,9 +18,12 @@
                     <span></span>
                 </button>
             </div>
-            <h1 id="logo">jaskeen</h1>
+            <div id="logo">
+                <span class="j">ȷ</span>askeen
+            </div>
             <button id="theme-toggle" aria-label="Toggle dark/light theme">
-                <i class="fas fa-moon" aria-hidden="true"></i>
+                <i class="far fa-sun" id="moon-icon" ></i>
+                <i class="far fa-moon" id="sun-icon" ></i>
             </button>
         </nav>
         <div class="dropdown-content" role="menu" aria-labelledby="menu-btn">
