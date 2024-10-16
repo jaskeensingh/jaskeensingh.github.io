@@ -280,35 +280,51 @@ section {
 }
 
 .gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+    position: relative;
+    width: 80%;
+    margin: 40px auto;
+    perspective: 1000px;
+}
+
+.gallery-stack {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
 }
 
 .gallery-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.gallery-img:hover,
-.gallery-img:focus {
-    transform: scale(1.05);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-.gallery-img.expanded {
-    width: 90%;
-    max-width: 500px;
-    height: auto;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1001;
-    border: 5px solid var(--accent-color);
-}
+.gallery-stack img:nth-child(1) {
+    transform: rotateY(0deg);
+  }
+  
+  .gallery-stack img:nth-child(2) {
+    transform: rotateY(15deg);
+  }
+  
+  .gallery-stack img:nth-child(3) {
+    transform: rotateY(30deg);
+  }
+  
+  /* add more styles for more images */
+  
+  .gallery-stack:hover {
+    transform: rotateY(15deg);
+  }
+  
+  .gallery-stack img:hover {
+    transform: rotateY(0deg);
+    z-index: 1;
+  }
 
 @media (max-width: 768px) {
     header {
@@ -322,4 +338,32 @@ section {
     .gallery-container {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
+}
+/* Center align sections */
+#about,
+#contact {
+    text-align: center;
+    max-width: 800px; /* Adjust this value as needed */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem; /* Reduced top padding to shift content upwards */
+}
+
+/* Center align headings */
+#about h3,
+#blog h3,
+#projects h3,
+#gallery h3,
+#contact h3 {
+    text-align: center;
+}
+
+/* Adjust spacing */
+section {
+    margin-top: -2rem; /* Negative margin to shift content upwards */
+}
+
+/* Ensure the first section after the hero doesn't overlap */
+#hero + section {
+    margin-top: 2rem; /* Positive margin for the first section after the hero */
 }

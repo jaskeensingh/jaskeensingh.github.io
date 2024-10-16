@@ -61,8 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    galleryContainer.addEventListener('click', handleGalleryClick);
-    document.addEventListener('click', handleGalleryClick);
+    const galleryStack = document.querySelector('.gallery-stack');
+
+    galleryStack.addEventListener('click', (event) => {
+    if (event.target.matches('.gallery-img')) {
+        const currentImage = event.target;
+        const nextImage = currentImage.nextElementSibling;
+        if (nextImage) {
+        currentImage.style.transform = 'rotateY(-15deg)';
+        nextImage.style.transform = 'rotateY(0deg)';
+        }
+    }
+    });
 
     // Animated cards
     const observerOptions = { threshold: 0.1 };
@@ -81,19 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(card);
     });
-
-    // Video controls (if you decide to add them)
-    const video = document.getElementById('bg-video');
-    const videoControl = document.getElementById('video-control');
-    if (videoControl) {
-        videoControl.addEventListener('click', () => {
-            if (video.paused) {
-                video.play();
-                videoControl.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
-            } else {
-                video.pause();
-                videoControl.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i>';
-            }
-        });
-    }
 });
