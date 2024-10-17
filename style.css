@@ -279,64 +279,97 @@ section {
     transform: translateY(-10px);
 }
 
-.gallery-container {
+#gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
     position: relative;
-    width: 80%;
-    margin: 40px auto;
+    overflow: hidden;
+    padding: 0 20px;
     perspective: 1000px;
 }
 
-.gallery-stack {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-}
-
-.gallery-img {
+.card {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.gallery-stack img:nth-child(1) {
-    transform: rotateY(0deg);
-  }
-  
-  .gallery-stack img:nth-child(2) {
-    transform: rotateY(15deg);
-  }
-  
-  .gallery-stack img:nth-child(3) {
-    transform: rotateY(30deg);
-  }
-  
-  /* add more styles for more images */
-  
-  .gallery-stack:hover {
-    transform: rotateY(15deg);
-  }
-  
-  .gallery-stack img:hover {
-    transform: rotateY(0deg);
+/* Center card */
+.card[data-position="0"] {
+    transform: translateX(0) scale(1);
+    z-index: 3;
+}
+
+/* Right cards */
+.card[data-position="1"] {
+    transform: translateX(240px) scale(0.8) rotate(4deg);
+    z-index: 2;
+}
+
+.card[data-position="2"] {
+    transform: translateX(420px) scale(0.6) rotate(10deg);
     z-index: 1;
-  }
+}
+
+/* Left cards */
+.card[data-position="-1"] {
+    transform: translateX(-240px) scale(0.8) rotate(-4deg);
+    z-index: 2;
+}
+
+.card[data-position="-2"] {
+    transform: translateX(-420px) scale(0.6) rotate(-10deg);
+    z-index: 1;
+}
+
+/* Far cards */
+.card[data-position^="-3"],
+.card[data-position^="3"] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(0) scale(0.4);
+}
 
 @media (max-width: 768px) {
-    header {
-        padding: 0.5rem;
+    .carousel {
+        height: 400px;
     }
-
-    #hero {
-        height: 80vh;
+    
+    .card {
+        width: 250px;
+        height: 350px;
     }
-
-    .gallery-container {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    
+    .card[data-position="1"] {
+        transform: translateX(220px) scale(0.8) rotate(4deg);
+    }
+    
+    .card[data-position="-1"] {
+        transform: translateX(-220px) scale(0.8) rotate(-4deg);
+    }
+    
+    .card[data-position="2"] {
+        transform: translateX(400px) scale(0.6) rotate(10deg);
+    }
+    
+    .card[data-position="-2"] {
+        transform: translateX(-400px) scale(0.6) rotate(-10deg);
     }
 }
 /* Center align sections */
