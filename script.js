@@ -1,80 +1,157 @@
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const themeToggle = document.getElementById('theme-toggle');
-    const logo = document.getElementById('logo');
     const menuBtn = document.getElementById('menu-btn');
     const dropdownContent = document.querySelector('.dropdown-content');
-    const moonIcon = document.getElementById('moon-icon');
-    const sunIcon = document.getElementById('sun-icon');
 
-    // Theme toggle
-    function setTheme(theme) {
-        if (theme === 'light') {
-            body.classList.add('light-theme');
-        } else {
-            body.classList.remove('light-theme');
-        }
-    }
-
-    // Apply saved theme or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-
+    // Theme toggle functionality
     themeToggle.addEventListener('click', () => {
-        const newTheme = body.classList.contains('light-theme') ? 'dark' : 'light';
-        setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
+        body.classList.toggle('light-theme');
     });
 
-    // Menu toggle
+    // Menu toggle functionality
     menuBtn.addEventListener('click', () => {
         menuBtn.classList.toggle('open');
-        dropdownContent.style.display = menuBtn.classList.contains('open') ? 'block' : 'none';
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.menu-toggle') && !event.target.closest('.dropdown-content')) {
-            menuBtn.classList.remove('open');
-            dropdownContent.style.display = 'none';
+    // Carousel functionality
+    const carousel = document.querySelector('.carousel');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    let isAnimating = false;
+    const totalCards = cards.length;
+
+    function updateCardPosition(card, position) {
+        // Ensure proper wrapping for position values
+        let wrappedPosition = position;
+        const halfLength = Math.floor(totalCards / 2);
+        
+        if (position > halfLength) {
+            wrappedPosition = position - totalCards;
+        } else if (position < -halfLength) {
+            wrappedPosition = position + totalCards;
+        }
+        
+        // Clamp visible positions between -2 and 2
+        const displayPosition = Math.max(Math.min(wrappedPosition, 2), -2);
+        card.setAttribute('data-position', displayPosition.toString());
+        card.setAttribute('data-actual-position', position.toString());
+        card.style.pointerEvents = Math.abs(displayPosition) <= 1 ? 'auto' : 'none';
+    }
+
+    function rotateCarousel(direction) {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        // Get current positions and sort cards by their actual position
+        const cardPositions = cards.map((card, index) => ({
+            card,
+            position: parseInt(card.getAttribute('data-actual-position') || '0'),
+            index
+        }));
+
+        // Update positions
+        cardPositions.forEach(({card}) => {
+            let currentPosition = parseInt(card.getAttribute('data-actual-position') || '0');
+            let newPosition = currentPosition + (direction === 'left' ? 1 : -1);
+            
+            // Ensure proper wrapping
+            if (newPosition > Math.floor(totalCards / 2)) {
+                newPosition -= totalCards;
+            } else if (newPosition < -Math.floor(totalCards / 2)) {
+                newPosition += totalCards;
+            }
+            
+            updateCardPosition(card, newPosition);
+        });
+
+        setTimeout(() => {
+            isAnimating = false;
+        }, 400);
+    }
+
+    // Initialize carousel
+    function initializeCarousel() {
+        const centerIndex = Math.floor(cards.length / 2);
+        cards.forEach((card, index) => {
+            let initialPosition = index - centerIndex;
+            // Ensure positions wrap properly
+            
+            updateCardPosition(card, initialPosition);
+        });
+    }
+
+    // Click handlers
+    cards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const position = parseInt(card.getAttribute('data-position') || '0');
+            if (Math.abs(position) === 1) {
+                rotateCarousel(position > 0 ? 'right' : 'left');
+            }
+        });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            rotateCarousel(e.key === 'ArrowLeft' ? 'left' : 'right');
         }
     });
 
-    // Logo animation
-    //
-    // Smooth scrolling for anchor links
+    // Touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        const difference = touchStartX - touchEndX;
+        
+        if (Math.abs(difference) > 50) {
+            rotateCarousel(difference > 0 ? 'left' : 'right');
+        }
+    }, { passive: true });
+
+    // Handle continuous rotation with proper tracking
+    setInterval(() => {
+        const positions = cards.map(card => 
+            parseInt(card.getAttribute('data-actual-position') || '0')
+        );
+        
+        // Check if any card needs repositioning
+        positions.forEach((pos, idx) => {
+            if (Math.abs(pos) > Math.floor(totalCards / 2)) {
+                const newPos = pos > 0 ? pos - totalCards : pos + totalCards;
+                updateCardPosition(cards[idx], newPos);
+            }
+        });
+    }, 1000);
+
+    // Initialize
+    initializeCarousel();
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(initializeCarousel, 100);
+    });
+
+    // Initialize other functionalities (smooth scrolling, etc.)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
+            document.querySelector(this.getAttribute('href'))?.scrollIntoView({
                 behavior: 'smooth'
             });
         });
     });
 
-    // Dynamic gallery
-    const handleGalleryClick = (event) => {
-        if (event.target.matches('.gallery-img')) {
-            event.target.classList.toggle('expanded');
-        } else if (!event.target.closest('.gallery-img')) {
-            document.querySelectorAll('.gallery-img.expanded').forEach(img => img.classList.remove('expanded'));
-        }
-    };
-
-    const galleryStack = document.querySelector('.gallery-stack');
-
-    galleryStack.addEventListener('click', (event) => {
-    if (event.target.matches('.gallery-img')) {
-        const currentImage = event.target;
-        const nextImage = currentImage.nextElementSibling;
-        if (nextImage) {
-        currentImage.style.transform = 'rotateY(-15deg)';
-        nextImage.style.transform = 'rotateY(0deg)';
-        }
-    }
-    });
-
-    // Animated cards
+    // Animated cards observer
     const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
