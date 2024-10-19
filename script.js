@@ -168,4 +168,17 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(card);
     });
+
+    document.getElementById('logo').addEventListener('click', function() {
+        if (window.location.pathname === '/') {
+            // If already on the homepage, scroll to the top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // If not on the homepage, navigate to the homepage
+            window.location.href = '/';
+        }
+    });
 });

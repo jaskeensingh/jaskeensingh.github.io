@@ -6,7 +6,7 @@
     <title>Jaskeen Singh - Personal Website</title>
     <meta name="description" content="Personal website of Jaskeen Singh, showcasing projects, blog, and photography.">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -52,13 +52,37 @@
       </section>
 
       <section id="blog">
-          <h3>Blog</h3>
-          <div class="blog-links">
-              <a href="blog-post-1.html" class="animated-card">Blog Post 1</a>
-              <a href="blog-post-2.html" class="animated-card">Blog Post 2</a>
-              <a href="blog-post-3.html" class="animated-card">Blog Post 3</a>
+        <h3>Blog</h3>
+        <div class="hex-grid">
+          <!-- Row 1 -->
+          <div class="hex filled-1"></div>
+          
+          <!-- Row 2 -->
+          <div class="hex">
+            <a href="https://medium.com/@jaskeensingh/introduction-to-p-adic-numbers-where-infinty-goes-backwards-dd22d1886429">
+              p-adic Numbers
+            </a>
           </div>
-      </section>
+          <div class="hex filled-2"></div>
+          <div class="hex">
+            <a href="blog-post-2.html">Mathematical Patterns</a>
+          </div>
+          <div class="hex filled-3"></div>
+          
+          <!-- Row 3 -->
+          <div class="hex">
+            <a href="blog-post-3.html">Abstract Algebra</a>
+          </div>
+          <div class="hex filled-4"></div>
+          <div class="hex">
+            <a href="blog-post-4.html">Category Theory</a>
+          </div>
+
+        <!-- Row 4 -->
+          <div class="hex filled-5"></div>
+        </div>
+
+      </section> 
 
       <section id="projects">
           <h3>Projects</h3>
@@ -107,13 +131,20 @@
     <footer>
       <section id="contact">
         <h3>Contact</h3>
-        <p>Feel free to reach out to me at: <a href="mailto:jaskeensingh22@gmail.com">jaskeensingh22@gmail.com</a></p>
+        <p>
+            Do reach out to me at <a href="mailto:jaskeensingh22@gmail.com">jaskeensingh22@gmail.com</a> regarding anything interesting :)
+        </p>
         <div class="social-links">
-            <a href="#" class="social-icon"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="https://github.com/jaskeensingh" class="social-icon"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/jaskeensingh" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/jaskeensingh" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com/justkeensingh" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/jaskeensingh" class="social-icon"><i class="fa-brands fa-facebook"></i></a>
         </div>
     </section>
+    <div class="footer-bottom"></div>
+        <p>&copy; 2024 Jaskeen Singh. All rights reserved.</p>
+    </div>
     </footer>
 
     <script src="script.js"></script>
