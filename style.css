@@ -260,7 +260,7 @@ body.light-theme header {
 }
 
 .animated-text {
-    font-size: 3rem;
+    font-size: 4rem;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
@@ -273,6 +273,14 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 2rem;
+}
+
+#blog p {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+    transition: color 0.3s ease;
+    line-height: 1.5;
 }
 
 .hex-grid {
@@ -305,33 +313,44 @@ section {
 
   /* Style for filled hexagons */
 .hex.filled-1 {
-    background: #ff4444;
+    background-image: url(images/Blog/p-adic.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    border: none;
   }
   
   .hex.filled-2 {
-    background: #4CAF50;
+    background-image: url(https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    border: none;
   }
   
   .hex.filled-3 {
-    background: #2196F3;
+    background-image: url(https://images.pexels.com/photos/28435070/pexels-photo-28435070/free-photo-of-ancient-rock-tombs-in-dalyan-turkiye.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     border: none;
   }
-  
+
   .hex.filled-4 {
-    background: #FFC107;
+    background-image: url(  https://images.pexels.com/photos/27220731/pexels-photo-27220731/free-photo-of-a-bee-is-on-a-sunflower-in-a-field.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    border: none;
   }
   
   .hex.filled-5 {
-    background: #9C27B0;
+    background-image: url(https://images.pexels.com/photos/6471779/pexels-photo-6471779.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    border: none;
   }
  
 
@@ -406,6 +425,126 @@ section {
     filter: brightness(1.2);
 }
 
+.hex a:hover {
+    color: #0077b5;; /* Change text color on hover */
+    filter: brightness(1.2);
+}
+
+#projects {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#projects h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+/* Carousel container styling */
+.carousel-container {
+    position: relative;
+    width:660px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px 60px;
+}
+
+.project-carousel {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    padding: 10px 0;
+}
+
+.project-card {
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    text-decoration: none;
+    color: var(--text-color);
+    width: 300px; /* Adjust based on your preference */
+    min-width: 300px;
+    transition: all 0.3s ease;
+    transform-origin: center center;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    background-color: var(--card-hover-bg-color);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+.project-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+}
+
+.project-card p {
+    margin: 0;
+    color: var(--accent-color);
+}
+
+.carousel-prev,
+.carousel-next {
+    background-color: var(--card-bg-color);
+    border: none;
+    color: var(--text-color);
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background-color: var(--card-hover-bg-color);
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+.carousel-prev:disabled,
+.carousel-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.carousel-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Make it responsive */
+@media (max-width: 800px) {
+    .carousel-container {
+        width: calc(300px + 40px); /* Show only one card on mobile */
+        padding: 20px 50px;
+    }
+}
+
 #gallery {
     display: flex;
     flex-direction: column;
@@ -433,36 +572,42 @@ section {
     background-position: center;
     border-radius: 15px;
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: all 0.4s ease-in-out;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    will-change: transform, opacity;
 }
 
 /* Center card */
 .card[data-position="0"] {
     transform: translateX(0) scale(1);
     z-index: 3;
+    opacity: 1;
 }
 
 /* Right cards */
 .card[data-position="1"] {
     transform: translateX(240px) scale(0.8) rotate(4deg);
     z-index: 2;
+    opacity: 1;
 }
 
 .card[data-position="2"] {
     transform: translateX(420px) scale(0.6) rotate(10deg);
     z-index: 1;
+    opacity: 1;
 }
 
 /* Left cards */
 .card[data-position="-1"] {
     transform: translateX(-240px) scale(0.8) rotate(-4deg);
     z-index: 2;
+    opacity: 1;
 }
 
 .card[data-position="-2"] {
     transform: translateX(-420px) scale(0.6) rotate(-10deg);
     z-index: 1;
+    opacity: 1;
 }
 
 /* Far cards */
@@ -470,7 +615,9 @@ section {
 .card[data-position^="3"] {
     opacity: 0;
     pointer-events: none;
-    transform: translateX(0) scale(0.4);
+    transform: translateX(0) scale(0.4) rotate(0deg);
+    display: none;
+    z-index: 0;
 }
 
 @media (max-width: 768px) {
@@ -565,7 +712,6 @@ body.light-theme .social-icon:hover {
     margin-left: auto;
     margin-right: auto;
     padding: 2rem 1rem; /* Reduced top padding to shift content upwards */
-    color: var(--accent-color); /* Change email link color */
     text-decoration: none; /* Remove underline */
     transition: color 0.3s ease; /* Smooth transition */
 }
@@ -619,7 +765,7 @@ footer {
 #gallery h3,
 #contact h3 {
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--text-color);
     margin-bottom: 1rem;
 }

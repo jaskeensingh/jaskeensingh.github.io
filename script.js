@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const menuBtn = document.getElementById('menu-btn');
     const dropdownContent = document.querySelector('.dropdown-content');
+    const carousel_1 = document.querySelector('.project-carousel');
+    const prevButton = document.querySelector('.carousel-prev');
+    const nextButton = document.querySelector('.carousel-next');
 
     // Theme toggle functionality
     themeToggle.addEventListener('click', () => {
@@ -20,53 +23,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
     let isAnimating = false;
     const totalCards = cards.length;
+    let currentIndex = 0; // Track the currently centered card
 
     function updateCardPosition(card, position) {
-        // Ensure proper wrapping for position values
-        let wrappedPosition = position;
-        const halfLength = Math.floor(totalCards / 2);
+        // Normalize the position for circular rotation
+        let normalizedPosition = position;
         
-        if (position > halfLength) {
-            wrappedPosition = position - totalCards;
-        } else if (position < -halfLength) {
-            wrappedPosition = position + totalCards;
+        // Wrap the positions so they rotate around
+        while (normalizedPosition < -(totalCards / 2)) {
+            normalizedPosition += totalCards;
+        }
+        while (normalizedPosition > (totalCards / 2)) {
+            normalizedPosition -= totalCards;
         }
         
-        // Clamp visible positions between -2 and 2
-        const displayPosition = Math.max(Math.min(wrappedPosition, 2), -2);
+        // Calculate the visible position
+        let displayPosition = Math.max(Math.min(normalizedPosition, 3), -3);
+        
+        // Update the card's attributes and style for visible positioning
         card.setAttribute('data-position', displayPosition.toString());
-        card.setAttribute('data-actual-position', position.toString());
-        card.style.pointerEvents = Math.abs(displayPosition) <= 1 ? 'auto' : 'none';
+        card.setAttribute('data-actual-position', normalizedPosition.toString());
+        
+        // Make sure the far cards don't disappear but become smaller and less opaque
+        if (Math.abs(displayPosition) <= 3) {
+            card.style.opacity = '1';
+            card.style.display = 'block';
+        }
     }
+    
 
     function rotateCarousel(direction) {
         if (isAnimating) return;
         isAnimating = true;
-
-        // Get current positions and sort cards by their actual position
-        const cardPositions = cards.map((card, index) => ({
-            card,
-            position: parseInt(card.getAttribute('data-actual-position') || '0'),
-            index
-        }));
-
-        // Update positions
-        cardPositions.forEach(({card}) => {
-            let currentPosition = parseInt(card.getAttribute('data-actual-position') || '0');
-            let newPosition = currentPosition + (direction === 'left' ? 1 : -1);
-            
-            // Ensure proper wrapping
-            if (newPosition > Math.floor(totalCards / 2)) {
-                newPosition -= totalCards;
-            } else if (newPosition < -Math.floor(totalCards / 2)) {
-                newPosition += totalCards;
-            }
-            
+    
+        // Get current positions
+        const currentPositions = cards.map(card => parseInt(card.getAttribute('data-actual-position') || '0'));
+    
+        // Update all positions
+        cards.forEach((card, index) => {
+            const currentPosition = currentPositions[index];
+            const newPosition = currentPosition + (direction === 'left' ? 1 : -1);
             updateCardPosition(card, newPosition);
         });
-
+    
         setTimeout(() => {
             isAnimating = false;
+            cards.forEach(card => {
+                const pos = parseInt(card.getAttribute('data-actual-position') || '0');
+                updateCardPosition(card, pos);
+            });
         }, 400);
     }
 
@@ -75,8 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const centerIndex = Math.floor(cards.length / 2);
         cards.forEach((card, index) => {
             let initialPosition = index - centerIndex;
-            // Ensure positions wrap properly
-            
             updateCardPosition(card, initialPosition);
         });
     }
@@ -118,18 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle continuous rotation with proper tracking
     setInterval(() => {
-        const positions = cards.map(card => 
-            parseInt(card.getAttribute('data-actual-position') || '0')
-        );
-        
-        // Check if any card needs repositioning
-        positions.forEach((pos, idx) => {
-            if (Math.abs(pos) > Math.floor(totalCards / 2)) {
-                const newPos = pos > 0 ? pos - totalCards : pos + totalCards;
-                updateCardPosition(cards[idx], newPos);
-            }
-        });
-    }, 1000);
+        if (!isAnimating) {
+            cards.forEach(card => {
+                const pos = parseInt(card.getAttribute('data-actual-position') || '0');
+                updateCardPosition(card, pos);
+            });
+        }
+    }, 500);
 
     // Initialize
     initializeCarousel();
@@ -151,22 +149,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Animated cards observer
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
+    // Set the initial scroll position
+    let scrollPosition = 0;
+    const cardWidth = 320; // card width + gap
+    const visibleCards = 2; // Number of cards visible at once
 
-    document.querySelectorAll('.animated-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(card);
+    function updateCarousel() {
+        carousel_1.style.transform = `translateX(-${scrollPosition}px)`;
+        
+        // Enable/disable buttons based on scroll position
+        prevButton.disabled = scrollPosition === 0;
+
+        // Calculate the maximum scroll position based on visible cards
+        const maxScroll = (carousel_1.children.length - visibleCards) * cardWidth;
+        nextButton.disabled = scrollPosition >= maxScroll;
+        
+    }
+    // Next button click handler
+    nextButton.addEventListener('click', () => {
+        const maxScroll = (carousel_1.children.length - visibleCards) * cardWidth;
+                if (scrollPosition < maxScroll) {
+                    scrollPosition += cardWidth;
+                    updateCarousel();
+                }
+    });
+    // Previous button click handler
+    prevButton.addEventListener('click', () => {
+        if (scrollPosition > 0) {
+            scrollPosition -= cardWidth;
+            scrollPosition = Math.max(0, scrollPosition);
+            updateCarousel();
+        }
+    });
+    // Initial button state
+    updateCarousel();
+
+    // Update on window resize
+    window.addEventListener('resize', () => {
+        // Reset position when switching to mobile view
+        if (window.innerWidth <= 800) {
+            scrollPosition = 0;
+        }
+        updateCarousel();
     });
 
     document.getElementById('logo').addEventListener('click', function() {
