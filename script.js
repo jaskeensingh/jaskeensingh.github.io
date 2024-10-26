@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const menuBtn = document.getElementById('menu-btn');
     const dropdownContent = document.querySelector('.dropdown-content');
+    const nameText = document.getElementById('name-text');
     const carousel_1 = document.querySelector('.project-carousel');
     const prevButton = document.querySelector('.carousel-prev');
     const nextButton = document.querySelector('.carousel-next');
@@ -17,6 +18,36 @@ document.addEventListener('DOMContentLoaded', () => {
         menuBtn.classList.toggle('open');
         dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
     });
+
+    // Initially hide the text
+    nameText.classList.add('hidden');
+
+    // Show the video and fade in the text after the video animation
+    setTimeout(() => {
+        nameText.classList.remove('hidden'); // Remove hidden class to show text
+        nameText.classList.add('visible'); // Add visible class to fade in
+    }, 1500); // Delay to match video container animation duration
+
+    const names = ["Jaskeen Singh", "ਜਸਕੀਨ ਸਿੰਘ"];
+    let index = 0;
+
+    function toggleName() {
+        // Fade out
+        nameText.classList.remove('visible'); // Remove visible class to fade out
+        nameText.classList.add('hidden'); // Add hidden class
+
+        // Wait for the fade-out transition to complete
+        setTimeout(() => {
+            index = (index + 1) % names.length; // Cycle index
+            nameText.textContent = names[index]; // Update text content
+            // Fade in
+            nameText.classList.remove('hidden'); // Remove hidden class
+            nameText.classList.add('visible'); // Add visible class to fade in
+        }, 1000); // Delay to match the fade-out time
+    }
+
+    // Set interval to toggle every 2 seconds
+    setInterval(toggleName, 3000);
 
     // Carousel functionality
     const carousel = document.querySelector('.carousel');

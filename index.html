@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaskeen Singh - Personal Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gurmukhi:wght@400;700&display=swap" rel="stylesheet">
+    <title>Jaskeen Singh</title>
     <meta name="description" content="Personal website of Jaskeen Singh, showcasing projects, blogs, and photography.">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
@@ -22,8 +23,8 @@
                 <span class="j">ȷ</span>askeen
             </div>
             <button id="theme-toggle" aria-label="Toggle dark/light theme">
-                <i class="fas fa-sun" id="moon-icon" ></i>
-                <i class="fas fa-moon" id="sun-icon" ></i>
+                <i class="fas fa-moon" id="moon-icon" ></i>
+                <i class="fas fa-sun" id="sun-icon" ></i>
             </button>
         </nav>
         <div class="dropdown-content" role="menu" aria-labelledby="menu-btn">
@@ -40,15 +41,15 @@
         <section id="hero">
           <div class="video-container">
               <video autoplay muted loop id="bg-video">
-                  <source src="videos/Favourites - 30 Apr 2023 – 6 Oct 2024.mov" type="video/mp4">
+                  <source src="videos/9239758-uhd_3840_2160_25fps.mp4" type="video/mp4">
               </video>
           </div>
-          <h2 class="animated-text">Jaskeen Singh</h2>
+          <h2 class="animated-text" id="name-text">Jaskeen Singh</h2>
       </section>
 
       <section id="about">
           <h3>About Me</h3>
-          <p>Hi I am Jaskeen Singh.</p>
+          <p>Hi I'm Jaskeen Singh. I currently work as the AI and Data Analyst in Deloitte USI.</p>
       </section>
 
       <section id="blog">
@@ -82,34 +83,72 @@
         <!-- Row 4 -->
           <div class="hex filled-5"></div>
         </div>
-
       </section> 
 
-      <section id="projects">
+      <section id="projects" class="projects-section">
         <h3>Projects</h3>
-        <div class="carousel-container">
-            <button class="carousel-prev">&#10094;</button>
-            <div class="project-carousel">
-                <div class="project-card animated-card">
-                    <h4>Project 1</h4>
-                    <p>Short description of Project 1</p>
-                </div>
-                <div class="project-card animated-card">
-                    <h4>Project 2</h4>
-                    <p>Short description of Project 2</p>
-                </div>
-                <div class="project-card animated-card">
-                    <h4>Project 3</h4>
-                    <p>Short description of Project 3</p>
-                </div>
-                <div class="project-card animated-card">
-                    <h4>Project 4</h4>
-                    <p>Short description of Project 4</p>
+        <p class="center-text">Here are some projects I've worked on. You can find more on my GitHub </p>
+        <div class="projects-grid">
+          <!-- Example project card (repeat this structure for each project) -->
+          <div class="project-card">
+              <div class="project-image">
+                  <!-- Use placeholder or your project image -->
+                  <img src="https://images.pexels.com/photos/965345/pexels-photo-965345.jpeg" alt="Project 1">
+              </div>
+              <div class="project-content">
+                  <h4>Project 1</h4>
+                  <p>Project Description and Tech.</p>
+                  <div class="project-links">
+                      <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+                      <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+                  </div>
+              </div>
+          </div>
+          <!-- Add more project cards as needed -->
+          <div class="project-card">
+            <div class="project-image">
+                <!-- Use placeholder or your project image -->
+                <img src="https://images.pexels.com/photos/323645/pexels-photo-323645.jpeg" alt="Project 1">
+            </div>
+            <div class="project-content">
+                <h4>Project 2</h4>
+                <p>Project Description and Tech.</p>
+                <div class="project-links">
+                    <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+                    <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
                 </div>
             </div>
-            <button class="carousel-next">&#10095;</button>
         </div>
-    </section>    
+        <div class="project-card">
+          <div class="project-image">
+              <!-- Use placeholder or your project image -->
+              <img src="https://images.pexels.com/photos/3183170/pexels-photo-3183170.jpeg" alt="Project 1">
+          </div>
+          <div class="project-content">
+              <h4>Project 3</h4>
+              <p>Project Description and Tech.</p>
+              <div class="project-links">
+                  <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+                  <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+              </div>
+          </div>
+      </div>
+      <div class="project-card">
+        <div class="project-image">
+            <!-- Use placeholder or your project image -->
+            <img src="https://images.pexels.com/photos/5641889/pexels-photo-5641889.jpeg" alt="Project 1">
+        </div>
+        <div class="project-content">
+            <h4>Project 4</h4>
+            <p>Project Description and Tech.</p>
+            <div class="project-links">
+                <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+        </div>
+    </div>
+      </div>
+      </section>  
 
       <section id="gallery">
           <h3>Gallery</h3>
