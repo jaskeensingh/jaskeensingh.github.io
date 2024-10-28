@@ -5,6 +5,7 @@
     --outline-color: #ffffff;
     --card-bg-color: rgba(255, 255, 255, 0.1);
     --card-hover-bg-color: rgba(255, 255, 255, 0.2);
+    scroll-behavior: smooth;
 }
 
 body {
@@ -30,6 +31,31 @@ a {
     color: inherit;
 }
 
+.skip-nav {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    padding: 8px;
+    z-index: 1001;
+    transition: top 0.3s ease;
+}
+
+.skip-nav:focus {
+    top: 0;
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent-color) var(--scroll), transparent 0);
+    z-index: 1002;
+}
+
 header {
     position: fixed;
     top: 0;
@@ -39,14 +65,25 @@ header {
     transition: background-color 0.3s ease;
 }
 
-/* Style for the theme toggle button */
-#theme-toggle {
-    background: none;   /* Remove background */
-    border: none;       /* Remove border */
-    cursor: pointer;    /* Pointer cursor on hover */
-    font-size: 1.2rem;  /* Adjust icon size */
-    color: var(--text-color);  /* Color should adapt to the theme */
-    z-index: 1001;      /* Ensure it is above other elements */
+/* Container for the toggle buttons */
+#toggle-buttons {
+    position: absolute;
+    top: 13px;            /* Adjust based on your header height */
+    right: 13px;          /* Adjust spacing from the right */
+    display: flex;
+    align-items: center;
+    gap: 4px;             /* Space between the language and theme toggle */
+    z-index: 1001;
+}
+
+/* Individual button styling */
+#theme-toggle, #language-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
 }
 
 #sun-icon {
@@ -61,13 +98,8 @@ body.light-theme #sun-icon {
     display: inline-block;
 }
 
-#theme-toggle i {
-    transition: transform 0.3s ease; /* Smooth transition when toggling */
-}
-
-/* Optional hover effect */
-#theme-toggle:hover i {
-    transform: scale(1.1); /* Slightly enlarge the icon when hovered */
+#theme-toggle:hover i, #language-toggle:hover {
+    transform: scale(1.1);
 }
 
 nav {
@@ -80,7 +112,7 @@ nav {
 
 #logo {
     font-family: 'Times New Roman', cursive;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);  /* Center the logo horizontally */
@@ -384,25 +416,25 @@ section {
     }
   
     .hex {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
     }
   
     .hex a {
-      font-size: 12px;
+      font-size: 8px;
       padding: 5px;
     }
   
     /* Mobile-specific positioning */
     .hex:nth-child(1) { grid-column: 2; grid-row: 1; transform: translateX(-150%) translateY(40%); }
-    .hex:nth-child(2) { grid-column: 1; grid-row: 2; transform: translateX(-115%) translateY(40%); }
-    .hex:nth-child(3) { grid-column: 3; grid-row: 2; transform: translateX(-180%) translateY(40%); }
-    .hex:nth-child(4) { grid-column: 2; grid-row: 3; transform: translateX(125%) translateY(-50%); }
-    .hex:nth-child(5) { grid-column: 3; grid-row: 3; transform: translateX(148%) translateY(-50%); }
-    .hex:nth-child(6) { grid-column: 1; grid-row: 4; transform: translateX(50%) translateY(-55%); }
-    .hex:nth-child(7) { grid-column: 2; grid-row: 4; transform: translateX(72%) translateY(-55%); }
-    .hex:nth-child(8) { grid-column: 3; grid-row: 4; transform: translateX(93%) translateY(-55%); }
-    .hex:nth-child(9) { grid-column: 2; grid-row: 5; transform: translateX(235%) translateY(-60%); }
+    .hex:nth-child(2) { grid-column: 1; grid-row: 2; transform: translateX(-90%) translateY(5%); }
+    .hex:nth-child(3) { grid-column: 3; grid-row: 2; transform: translateX(-210%) translateY(5%); }
+    .hex:nth-child(4) { grid-column: 2; grid-row: 3; transform: translateX(125%) translateY(-115%); }
+    .hex:nth-child(5) { grid-column: 3; grid-row: 3; transform: translateX(120%) translateY(-115%); }
+    .hex:nth-child(6) { grid-column: 1; grid-row: 4; transform: translateX(75%) translateY(-150%); }
+    .hex:nth-child(7) { grid-column: 2; grid-row: 4; transform: translateX(70%) translateY(-150%); }
+    .hex:nth-child(8) { grid-column: 3; grid-row: 4; transform: translateX(65%) translateY(-150%); }
+    .hex:nth-child(9) { grid-column: 2; grid-row: 5; transform: translateX(235%) translateY(-185%); }
   }
 
    /* Hover effect for hexagons */
@@ -438,7 +470,24 @@ section {
     background: var(--card-bg-color);
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
 }
 
 .project-card:hover {
@@ -625,41 +674,41 @@ section {
   /* Mobile layout (481px - 767px) */
 @media (min-width: 481px) and (max-width: 767px) {
     .carousel {
-      height: 400px;
+      height: 300px;
       padding: 0 10px;
     }
   
     .card {
-      width: 240px;
-      height: 330px;
+      width: 200px;
+      height: 290px;
     }
   
     .card[data-position="0"] {
-      transform: translateX(0) scale(0.8);
+      transform: translateX(0) scale(0.5);
       z-index: 3;
       opacity: 1;
     }
   
     .card[data-position="1"] {
-      transform: translateX(150px) scale(0.6) rotate(6deg);
+      transform: translateX(80px) scale(0.4) rotate(6deg);
       z-index: 2;
       opacity: 0.8;
     }
   
     .card[data-position="-1"] {
-      transform: translateX(-150px) scale(0.6) rotate(-6deg);
+      transform: translateX(-80px) scale(0.4) rotate(-6deg);
       z-index: 2;
       opacity: 0.8;
     }
   
     .card[data-position="2"] {
-        transform: translateX(250px) scale(0.4) rotate(8deg);
+        transform: translateX(130px) scale(0.3) rotate(8deg);
         z-index: 1;
         opacity: 0.7;
       }
     
       .card[data-position="-2"] {
-        transform: translateX(-250px) scale(0.4) rotate(-8deg);
+        transform: translateX(-130px) scale(0.3) rotate(-8deg);
         z-index: 1;
         opacity: 0.7;
       }
@@ -673,10 +722,28 @@ section {
     margin-right: 15px; /* Space between icons */
     display: inline-flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
 }
 
 .social-links a:hover {
     color: #a7a7a7; /* Change color on hover for a nice effect */
+}
+
+.social-links a:hover::after {
+    transform: translateX(0);
 }
 
 .social-links i {

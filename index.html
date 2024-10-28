@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
     <header>
         <nav aria-label="Main navigation">
             <div class="menu-toggle">
-                <button id="menu-btn" aria-label="Toggle menu">
+                <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -22,39 +24,41 @@
             <div id="logo">
                 <span class="j">ȷ</span>askeen
             </div>
-            <button id="theme-toggle" aria-label="Toggle dark/light theme">
-                <i class="fas fa-moon" id="moon-icon" ></i>
-                <i class="fas fa-sun" id="sun-icon" ></i>
-            </button>
+            <div id="toggle-buttons">
+                <button id="language-toggle" aria-label="Toggle English/Punjabi language">ਪੰ | EN</button>
+                <button id="theme-toggle" aria-label="Toggle dark/light theme">
+                    <i class="fas fa-moon" id="moon-icon"></i>
+                    <i class="fas fa-sun" id="sun-icon"></i>
+                </button>
+            </div>
         </nav>
         <div class="dropdown-content" role="menu" aria-labelledby="menu-btn">
-            <a href="#about" role="menuitem">About</a>
-            <a href="#blog" role="menuitem">Blog</a>
-            <a href="#projects" role="menuitem">Projects</a>
-            <a href="#gallery" role="menuitem">Gallery</a>
-            <a href="#contact" role="menuitem">Contact</a>
+            <a href="#about" role="menuitem" data-en="About" data-pa="ਬਾਰੇ">About</a>
+            <a href="#blog" role="menuitem" data-en="Blog" data-pa="ਬਲੌਗ">Blog</a>
+            <a href="#projects" role="menuitem" data-en="Projects" data-pa="ਪ੍ਰੋਜੈਕਟ">Projects</a>
+            <a href="#gallery" role="menuitem" data-en="Gallery" data-pa="ਗੈਲਰੀ">Gallery</a>
+            <a href="#contact" role="menuitem" data-en="Contact" data-pa="ਸੰਪਰਕ">Contact</a>
         </div>
     </header>
 
     <main id="main-content">
-        <!-- Rest of the content remains the same -->
         <section id="hero">
           <div class="video-container">
-              <video autoplay muted loop id="bg-video">
+              <video autoplay muted loop id="bg-video" playsinline preload="none">
                   <source src="12451274_1920_1080_24fps.mp4" type="video/mp4">
               </video>
           </div>
           <h2 class="animated-text" id="name-text">Jaskeen Singh</h2>
-      </section>
+        </section>
 
       <section id="about">
-          <h3>About Me</h3>
-          <p>Hi I'm Jaskeen Singh. I currently work as the AI and Data Analyst in Deloitte USI.</p>
-      </section>
+        <h3 data-en="About Me" data-pa="ਮੇਰੇ ਬਾਰੇ">About Me</h3>
+        <p data-en="Hi I'm Jaskeen Singh. I currently work as the AI and Data Analyst in Deloitte USI." data-pa="ਹੈਲੋ, ਮੈਂ ਜਸਕੈਨ ਸਿੰਘ ਹਾਂ। ਮੈਂ ਇਸ ਸਮੇਂ ਡਲੌਇਟ USI ਵਿੱਚ AI ਅਤੇ ਡਾਟਾ ਵਿਸ਼ਲੇਸ਼ਕ ਕਿਰਦਾਰ ਵਿੱਚ ਕੰਮ ਕਰ ਰਿਹਾ ਹਾਂ।">Hi I'm Jaskeen Singh. I currently work as the AI and Data Analyst in Deloitte USI.</p>
+    </section>
 
       <section id="blog">
-        <h3>Blog</h3>
-        <p>I do write, occasionally, capturing fleeting thoughts, quiet observations, and the stories life weaves around me. I also, at times, wander into the realm of science, where curiosity tugs at my mind. These are my words, pieces of my journey, shared with you in the hope they resonate. I trust you’ll find a quiet joy in reading them <3 </p>
+        <h3 data-en="Blog" data-pa="ਬਲੌਗ">Blog</h3>
+        <p data-en="I do write, occasionally, capturing fleeting thoughts, quiet observations, and the stories life weaves around me. I also, at times, wander into the realm of science, where curiosity tugs at my mind. These are my words, pieces of my journey, shared with you in the hope they resonate. I trust you’ll find a quiet joy in reading them <3" data-pa="ਮੈਂ ਕਦੇ ਕਦੇ ਲਿਖਦਾ ਹਾਂ, ਛੋਟੀਆਂ ਸੋਚਾਂ, ਸ਼ਾਂਤ ਨਿਰੀਖਣ ਅਤੇ ਜ਼ਿੰਦਗੀ ਦੀਆਂ ਕਹਾਣੀਆਂ ਜੋ ਮੇਰੇ ਆਲੇ ਦੁਆਲੇ ਵਣਦੀਆਂ ਹਨ, ਨੂੰ ਕੈਪਚਰ ਕਰਦਾ ਹਾਂ। ਮੈਨੂੰ ਉਮੀਦ ਹੈ ਕਿ ਤੁਸੀਂ ਇਹਨੂੰ ਪੜ੍ਹਨ ਵਿੱਚ ਖੁਸ਼ੀ ਮਹਿਸੂਸ ਕਰੋਗੇ <3">I do write, occasionally, capturing fleeting thoughts, quiet observations, and the stories life weaves around me. I also, at times, wander into the realm of science, where curiosity tugs at my mind. These are my words, pieces of my journey, shared with you in the hope they resonate. I trust you’ll find a quiet joy in reading them <3</p>
         <div class="hex-grid">
           <!-- Row 1 -->
           <div class="hex filled-1"></div>
@@ -86,13 +90,12 @@
       </section> 
 
       <section id="projects" class="projects-section">
-        <h3>Projects</h3>
-        <p class="center-text">Here are some projects I've worked on. You can find more on my GitHub </p>
+        <h3 data-en="Projects" data-pa="ਪ੍ਰੋਜੈਕਟ">Projects</h3>
+        <p class="center-text" data-en="Here are some projects I've worked on. You can find more on my GitHub" data-pa="ਇਹ ਕੁਝ ਪ੍ਰੋਜੈਕਟ ਹਨ ਜਿਨ੍ਹਾਂ 'ਤੇ ਮੈਂ ਕੰਮ ਕੀਤਾ ਹੈ। ਤੁਸੀਂ ਹੋਰ ਮੇਰੇ GitHub ਤੇ ਵੇਖ ਸਕਦੇ ਹੋ।">Here are some projects I've worked on. You can find more on my GitHub</p>
         <div class="projects-grid">
           <!-- Example project card (repeat this structure for each project) -->
           <div class="project-card">
               <div class="project-image">
-                  <!-- Use placeholder or your project image -->
                   <img src="https://images.pexels.com/photos/965345/pexels-photo-965345.jpeg" alt="Project 1">
               </div>
               <div class="project-content">
@@ -107,7 +110,6 @@
           <!-- Add more project cards as needed -->
           <div class="project-card">
             <div class="project-image">
-                <!-- Use placeholder or your project image -->
                 <img src="https://images.pexels.com/photos/323645/pexels-photo-323645.jpeg" alt="Project 1">
             </div>
             <div class="project-content">
@@ -121,7 +123,6 @@
         </div>
         <div class="project-card">
           <div class="project-image">
-              <!-- Use placeholder or your project image -->
               <img src="https://images.pexels.com/photos/3183170/pexels-photo-3183170.jpeg" alt="Project 1">
           </div>
           <div class="project-content">
@@ -135,7 +136,6 @@
       </div>
       <div class="project-card">
         <div class="project-image">
-            <!-- Use placeholder or your project image -->
             <img src="https://images.pexels.com/photos/5641889/pexels-photo-5641889.jpeg" alt="Project 1">
         </div>
         <div class="project-content">
@@ -151,7 +151,7 @@
       </section>  
 
       <section id="gallery">
-          <h3>Gallery</h3>
+        <h3 data-en="Gallery" data-pa="ਗੈਲਰੀ">Gallery</h3>
           <div class="carousel">
                 <div class="card" style="background-image: url('images/Gallery/IMG_5456.JPG')"></div>
                 <div class="card" style="background-image: url('images/Gallery/IMG_5661.jpg')"></div>
@@ -173,7 +173,7 @@
 
     <footer>
       <section id="contact">
-        <h3>Contact</h3>
+        <h3 data-en="Contact" data-pa="ਸੰਪਰਕ">Contact</h3>
         <p>
             Do reach out to me at <a href="mailto:jaskeensingh22@gmail.com">jaskeensingh22@gmail.com</a> regarding anything interesting :)
         </p>

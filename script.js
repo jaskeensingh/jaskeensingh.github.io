@@ -7,11 +7,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const carousel_1 = document.querySelector('.project-carousel');
     const prevButton = document.querySelector('.carousel-prev');
     const nextButton = document.querySelector('.carousel-next');
+    const languageToggle = document.getElementById('language-toggle');
 
     // Theme toggle functionality
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('light-theme');
     });
+
+    let isPunjabi = false;
+
+    languageToggle.addEventListener('click', () => {
+        isPunjabi = !isPunjabi;
+
+        // Toggle button text to show current language
+        languageToggle.textContent = isPunjabi ? 'EN | ਪੰ' : 'ਪੰ | EN';
+
+        // Find all elements with data-en and data-pa attributes
+        document.querySelectorAll('[data-en][data-pa]').forEach(element => {
+            element.textContent = isPunjabi ? element.getAttribute('data-pa') : element.getAttribute('data-en');
+        });
+    });
+
 
     // Menu toggle functionality
     menuBtn.addEventListener('click', () => {
