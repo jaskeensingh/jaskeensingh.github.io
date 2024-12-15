@@ -15,6 +15,7 @@ body {
     margin: 0;
     padding: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-text-size-adjust: 100%; /* Prevents auto-scaling */
 }
 
 body.light-theme {
@@ -213,7 +214,20 @@ body.light-theme header {
 
 @media (max-width: 768px) {
     #logo {
-        font-size: 1.5rem;
+        font-size: 1rem;
+    }
+
+    #theme-toggle, #language-toggle, #menu-btn {
+        font-size: 0.9rem; /* Make icons smaller */
+    }
+
+    #menu-btn {
+        width: 24px;
+        height: 16px;
+    }
+
+    #menu-btn span {
+        height: 1.5px; /* Thinner bars for menu icon */
     }
 }
 
@@ -232,6 +246,7 @@ body.light-theme header {
     border-radius: 20px;
     overflow: hidden;
     position: relative;
+    margin-bottom: 2rem;
     animation: openContainer 1.5s ease-out forwards;
 }
 
@@ -247,14 +262,10 @@ body.light-theme header {
 }
 
 #bg-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translateX(-50%) translateY(-50%);
+    width: 100vw; /* Full width */
+    height: 100vh; /* Automatically adjusts the height */
+    object-fit: cover;
+    border-radius: 20px;
 }
 
 .animated-text {
@@ -262,7 +273,7 @@ body.light-theme header {
     text-align: center;
     z-index: 4;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -287,20 +298,106 @@ body.light-theme header {
         opacity: 1;
     }
 }
+@media (min-width: 1025px) {
 
-@media (max-width: 768px) {
     .video-container {
         width: 90%;
-        height: 50%;
+    }
+
+    #bg-video {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        object-fit: contain; /* Maintains aspect ratio and avoids clipping */
+        
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .video-container {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    #bg-video {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        object-fit: contain; /* Maintains aspect ratio and avoids clipping */
+        
     }
 
     .animated-text {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        top: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .video-container {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    #bg-video {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        object-fit: contain; /* Maintains aspect ratio and avoids clipping */
+        
+    }
+
+    .animated-text {
+        font-size: 1.5rem;
+        top: 25%;
+    }
+}
+
+.about-content {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.5;
+    gap: 20px;
+}
+
+.about-image {
+    width: 120px;          /* Set the size of the circular image */
+    height: 120px;
+    border-radius: 50%;    /* Make the image circular */
+    object-fit: cover;     /* Ensure the image scales well within the circle */
+    transition: width 0.3s, height 0.3s;
+}
+
+/* Larger screens (desktops) */
+@media (min-width: 992px) {
+    .about-image {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .about-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 767px) {
+    .about-image {
+        width: 100px;
+        height: 100px;
     }
 }
 
 section {
-    padding: 4rem 2rem;
+    padding: 4rem 1rem;
 }
 
 #blog p {
