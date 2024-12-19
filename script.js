@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Find all elements with data-en and data-pa attributes
         document.querySelectorAll('[data-en][data-pa]').forEach(element => {
-            element.textContent = isPunjabi ? element.getAttribute('data-pa') : element.getAttribute('data-en');
+            element.innerHTML = isPunjabi ? element.getAttribute('data-pa') : element.getAttribute('data-en');
         });
     });
 
@@ -238,18 +238,5 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollPosition = 0;
         }
         updateCarousel();
-    });
-
-    document.getElementById('logo').addEventListener('click', function() {
-        if (window.location.pathname === '/') {
-            // If already on the homepage, scroll to the top
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        } else {
-            // If not on the homepage, navigate to the homepage
-            window.location.href = '/';
-        }
     });
 });

@@ -233,7 +233,6 @@ body.light-theme header {
 
 #hero {
     position: relative;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -300,58 +299,59 @@ body.light-theme header {
 }
 @media (min-width: 1025px) {
 
-    .video-container {
-        width: 90%;
+    #hero {
+        height: 100vh; /* Full viewport height for desktop */
     }
 
-    #bg-video {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        object-fit: contain; /* Maintains aspect ratio and avoids clipping */
-        
+    .video-container {
+        width: 90%;
+        height: 80%;
+    }
+
+    .animated-text {
+        font-size: 4rem; /* Large text for desktop */
     }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
 
+    #hero {
+        height: 60vh; /* Reduced height for tablets */
+        margin-top: 20px; /* Add space for the header */
+    }
+    
     .video-container {
         width: 100%;
+        height: auto;
         margin-bottom: 1rem;
     }
 
-    #bg-video {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        object-fit: contain; /* Maintains aspect ratio and avoids clipping */
-        
-    }
-
     .animated-text {
-        font-size: 2rem;
-        top: 30%;
+        font-size: 3rem; /* Medium text for tablets */
     }
 }
 
 @media (max-width: 768px) {
 
+    #hero {
+        height: auto; /* Auto height for mobile */
+        min-height: 50vh; /* Minimum height to ensure video visibility */
+        padding: 2rem 0; /* Add some padding top and bottom */
+        margin-top: 50px; /* Add space for the header */
+    }
+    
     .video-container {
         width: 100%;
+        height: auto;
         margin-bottom: 0.5rem;
     }
 
     #bg-video {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
-        object-fit: contain; /* Maintains aspect ratio and avoids clipping */
-        
+        max-height: 40vh; /* Limit video height on mobile */
     }
 
     .animated-text {
-        font-size: 1.5rem;
-        top: 25%;
+        font-size: 2rem; /* Smaller text for mobile */
     }
 }
 
