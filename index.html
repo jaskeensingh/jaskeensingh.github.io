@@ -6,11 +6,13 @@
     <title>Jaskeen Singh</title>
     <meta name="description" content="Personal website of Jaskeen Singh, showcasing projects, blogs, and photography.">
     <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
   <a href="#main-content" class="skip-nav">Skip to main content</a>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
   <header>
     <nav aria-label="Main navigation">
       <div class="menu-toggle">
@@ -41,34 +43,34 @@
       <a href="#contact" role="menuitem" data-en="Contact" data-pa="ਸੰਪਰਕ">Contact</a>
     </div>
   </header>
-  
+
   <main id="main-content">
     <section id="hero">
       <div class="video-container">
-        <video autoplay muted loop id="bg-video" playsinline preload="none">
+  <video autoplay muted loop id="bg-video" playsinline preload="none" fetchpriority="high">
           <source src="12451274_1920_1080_24fps.mp4" type="video/mp4">
         </video>
       </div>
       <h2 class="animated-text" id="name-text">Jaskeen Singh</h2>
     </section>
-    
+
     <section id="about">
       <h3 data-en="About Me" data-pa="ਮੇਰੇ ਬਾਰੇ">About Me</h3>
       <div class="about-content">
-        <img src="images/IMG_7484.webp" alt="Jaskeen Singh's portrait" class="about-image" loading="lazy">
-        <p data-en="Hi I'm Jaskeen Singh. I currently work as an AI and Data Analyst at Deloitte USI. From generative AI and mathematics to the mysteries of quantum physics and astronomy, I'm driven by an insatiable curiosity to understand the world and create solutions that matter. When I'm not decoding complex datasets, you'll find me on the squash court, exploring new running trails, or sketching my way through creative insights. My passion lies in building technology that can genuinely help people at large, bridging the gap between intellectual exploration and practical impact. Travel, continuous learning, and a deep love for understanding the universe fuel my journey. Always eager to connect, collaborate, and turn wild ideas into meaningful innovations." data-pa="ਹੈਲੋ, ਮੈਂ ਜਸਕੈਨ ਸਿੰਘ ਹਾਂ। ਮੈਂ ਡਲੌਇਟ USI ਵਿੱਚ AI ਅਤੇ ਡਾਟਾ ਵਿਸ਼ਲੇਸ਼ਕ ਕਿਰਦਾਰ ਵਿੱਚ ਕੰਮ ਕਰ ਰਿਹਾ ਹਾਂ। ਜਨਰੇਟਿਵ AI, ਗਣਿਤ, ਕੁਆਂਟਮ ਭੌਤਿਕੀ ਅਤੇ ਖਗੋਲ ਵਿਗਿਆਨ ਦੇ ਰਹੱਸਾਂ ਤੋਂ ਲੈ ਕੇ, ਮੈਂ ਦੁਨੀਆਂ ਨੂੰ ਸਮਝਣ ਅਤੇ ਮਹੱਤਵਪੂਰਨ ਹੱਲ ਬਣਾਉਣ ਦੀ ਅਥਾਹ ਉਤਸੁਕਤਾ ਨਾਲ ਪ੍ਰੇਰਿਤ ਹਾਂ। ਜਦੋਂ ਮੈਂ ਜਟਿਲ ਡਾਟਾਸੈਟਾਂ ਨੂੰ ਡਿਕੋਡ ਨਹੀਂ ਕਰ ਰਿਹਾ ਹੁੰਦਾ, ਤਾਂ ਤੁਸੀਂ ਮੈਨੂੰ ਸਕੁਆਸ਼ ਕੋਰਟ ਤੇ, ਨਵੀਆਂ ਦੌੜ ਦੇ ਰਸਤਿਆਂ 'ਤੇ, ਜਾਂ ਜਿਮ ਯਾ ਚਿੱਤਰਕਾਰੀ ਕਰਦਿਆਂ ਲੱਭ ਸਕਦੇ ਹੋ। ਮੇਰਾ ਜਨੂੰਨ ਉਸ ਤਕਨਾਲੋਜੀ ਨੂੰ ਬਣਾਉਣ ਵਿੱਚ ਹੈ ਜੋ ਲੋਕਾਂ ਦੀ ਸੱਚ-ਮੁੱਚ ਮਦਦ ਕਰ ਸਕੇ, ਬੌਧਿਕ ਖੋਜ ਅਤੇ ਵਾਸਤਵਿਕ ਪ੍ਰਭਾਵ ਦੇ ਵਿਚਕਾਰ ਪੁਲ ਬਣਾ ਸਕੇ। ਯਾਤਰਾ, ਨਿਰੰਤਰ ਸਿੱਖਣਾ ਅਤੇ ਬਰਹਮਾਂਡ ਨੂੰ ਸਮਝਣ ਦਾ ਡੂੰਘਾ ਪਿਆਰ ਮੇਰੀ ਯਾਤਰਾ ਨੂੰ ਚਲਾਉਂਦਾ ਹੈ। ਮੈਂ ਹਮੇਸ਼ਾ ਤੁਹਾਡੇ ਨਾਲ ਜੁੜਕੇ, ਸਹਿਯੋਗ ਕਰਕੇ ਅਤੇ ਵਿਚਾਰਾਂ ਨੂੰ ਅਰਥਪੂਰਨ ਨਵੀਨਤਾਵਾਂ ਵਿੱਚ ਬਦਲਣ ਲਈ ਤਤਪਰ ਹਾਂ।">
-              Hi I'm Jaskeen Singh. I currently work as an AI and Data Analyst at Deloitte USI. From generative AI and mathematics to the mysteries of quantum physics and astronomy, I'm driven by an insatiable curiosity to understand the world and create solutions that matter. When I'm not decoding complex datasets, you'll find me on the squash court, exploring new running trails, or sketching my way through creative insights. My passion lies in building technology that can genuinely help people at large, bridging the gap between intellectual exploration and practical impact. Travel, continuous learning, and a deep love for understanding the universe fuel my journey. Always eager to connect, collaborate, and turn wild ideas into meaningful innovations.
+        <img src="images/IMG_2544.webp" alt="Jaskeen Singh's portrait" class="about-image" loading="lazy">
+        <p data-en="Hi! I'm Jaskeen Singh. I currently work as an AI and Data Analyst at Deloitte USI. From AI, ML and mathematics to the mysteries of quantum physics and astronomy, I'm driven by an insatiable curiosity to understand the world and create solutions that matter. You'll also find me on the squash court, exploring new running trails, or simply just sketching sipping my coffee in a peaceful cafe. My passion lies in building technology that can genuinely help people at large, bridging the gap between intellectual exploration and practical impact. Travel, continuous learning, and a really deep curiosity for understanding the universe fuel my journey. I am always eager to connect, collaborate, and turn wild ideas into meaningful innovations." data-pa="ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ! ਮੈਂ ਜਸਕੈਨ ਸਿੰਘ ਹਾਂ। ਮੈਂ ਡਲੌਇਟ USI ਵਿੱਚ AI ਅਤੇ ਡਾਟਾ ਵਿਸ਼ਲੇਸ਼ਕ ਵਜੋਂ ਕੰਮ ਕਰ ਰਿਹਾ ਹਾਂ। ਜਨਰੇਟਿਵ AI, ML ਅਤੇ ਗਣਿਤ ਤੋਂ ਲੈ ਕੇ ਕੁਆਂਟਮ ਭੌਤਿਕ ਵਿਗਿਆਨ ਅਤੇ ਖਗੋਲ ਵਿਗਿਆਨ ਦੇ ਰਹੱਸਾਂ ਤੱਕ, ਮੈਂ ਦੁਨੀਆ ਨੂੰ ਸਮਝਣ ਅਤੇ ਮਹੱਤਵਪੂਰਨ ਹੱਲ ਬਣਾਉਣ ਲਈ ਇੱਕ ਅਥਾਹ ਉਤਸੁਕਤਾ ਦੁਆਰਾ ਪ੍ਰੇਰਿਤ ਹਾਂ। ਤੁਸੀਂ ਮੈਨੂੰ ਸਕੁਐਸ਼ ਕੋਰਟ 'ਤੇ ਵੀ ਪਾਓਗੇ, ਨਵੇਂ ਦੌੜਨ ਵਾਲੇ ਰਸਤੇ ਦੀ ਪੜਚੋਲ ਕਰਦੇ ਹੋਏ, ਜਾਂ ਇੱਕ ਸ਼ਾਂਤ ਕੈਫੇ ਵਿੱਚ ਆਪਣੀ ਕੌਫੀ ਦੀ ਚੁਸਕੀ ਲੈਂਦੇ ਹੋਏ। ਮੇਰਾ ਜਨੂੰਨ ਅਜਿਹੀ ਤਕਨਾਲੋਜੀ ਬਣਾਉਣ ਵਿੱਚ ਹੈ ਜੋ ਸੱਚਮੁੱਚ ਲੋਕਾਂ ਦੀ ਮਦਦ ਕਰ ਸਕੇ, ਬੌਧਿਕ ਖੋਜ ਅਤੇ ਵਿਹਾਰਕ ਪ੍ਰਭਾਵ ਵਿਚਕਾਰ ਪਾੜੇ ਨੂੰ ਪੂਰਾ ਕਰ ਸਕੇ। ਯਾਤਰਾ, ਨਿਰੰਤਰ ਸਿਖਲਾਈ, ਅਤੇ ਬ੍ਰਹਿਮੰਡ ਨੂੰ ਸਮਝਣ ਲਈ ਇੱਕ ਡੂੰਘੀ ਸੱਚਮੁੱਚ ਉਤਸੁਕਤਾ ਮੇਰੀ ਯਾਤਰਾ ਨੂੰ ਵਧਾਉਂਦੀ ਹੈ। ਮੈਂ ਹਮੇਸ਼ਾ ਜੁੜਨ, ਸਹਿਯੋਗ ਕਰਨ ਅਤੇ ਜੰਗਲੀ ਵਿਚਾਰਾਂ ਨੂੰ ਅਰਥਪੂਰਨ ਨਵੀਨਤਾਵਾਂ ਵਿੱਚ ਬਦਲਣ ਲਈ ਉਤਸੁਕ ਰਹਿੰਦਾ ਹਾਂ।">
+              Hi! I'm Jaskeen Singh. I currently work as an AI and Data Analyst at Deloitte USI. From AI, ML and mathematics to the mysteries of quantum physics and astronomy, I'm driven by an insatiable curiosity to understand the world and create solutions that matter. You'll also find me on the squash court, exploring new running trails, or simply just sketching sipping my coffee in a peaceful cafe. My passion lies in building technology that can genuinely help people at large, bridging the gap between intellectual exploration and practical impact. Travel, continuous learning, and a deep really curiosity for understanding the universe fuel my journey. I am always eager to connect, collaborate, and turn wild ideas into meaningful innovations.
         </p>
       </div>
     </section>
-    
+
     <section id="blog">
       <h3 data-en="Blog" data-pa="ਬਲੌਗ">Blog</h3>
-      <p data-en="I do write, occasionally, capturing fleeting thoughts, quiet observations, and the stories life weaves around me. I also, at times, wander into the realm of science, where curiosity tugs at my mind. These are my words, pieces of my journey, shared with you in the hope they resonate. You can find more of my writings under the posts of my online journal <a href='https://www.instagram.com/scarsandspades' target='_blank' style='color:#0077b5;'>scarsandspades</a>. I trust you will find a quiet joy in reading them <3" data-pa="ਮੈਂ ਕਦੇ ਕਦੇ ਲਿਖਦਾ ਹਾਂ, ਛੋਟੀਆਂ ਸੋਚਾਂ, ਤੇਜ਼ ਖਿਆਲਾਂ, ਸ਼ਾਂਤ ਨਿਰੀਖਣਾਂ ਅਤੇ ਉਹ ਕਹਾਣੀਆਂ ਨੂੰ ਫੜਦਿਆਂ ਜੋ ਜੀਵਨ ਮੇਰੇ ਆਲੇ-ਦੁਆਲੇ ਬੁਣਦਾ ਹੈ। ਕਈ ਵਾਰ, ਮੈਂ ਵਿਗਿਆਨ ਦੇ ਖੇਤਰ ਵਿੱਚ ਭਟਕਦਾ ਹਾਂ, ਜਿੱਥੇ ਉਤਸੁਕਤਾ ਮੇਰੇ ਮਨ ਨੂੰ ਖਿੱਚਦੀ ਹੈ। ਇਹ ਮੇਰੇ ਸ਼ਬਦ ਹਨ, ਮੇਰੀ ਯਾਤਰਾ ਦੇ ਟੁਕੜੇ, ਜੋ ਮੈਂ ਤੁਹਾਡੇ ਨਾਲ ਸਾਂਝੇ ਕਰਦਾ ਹਾਂ ਉਮੀਦ ਕਰਦਿਆਂ ਕਿ ਇਹ ਤੁਹਾਡੇ ਵਿੱਚ ਪ੍ਰਤਿਧਵਨੀ ਜਗਾਉਣਗੇ। ਤੁਸੀਂ ਮੇਰੀਆਂ ਹੋਰ ਲਿਖਤਾਂ ਮੇਰੇ ਆਨਲਾਈਨ ਜਰਨਲ <a href='https://www.instagram.com/scarsandspades' target='_blank' style='color:#0077b5;'>scarsandspades</a> ਵਿੱਚ ਲੱਭ ਸਕਦੇ ਹੋ। ਮੈਨੂੰ ਭਰੋਸਾ ਹੈ ਕਿ ਤੁਹਾਨੂੰ ਇਹਨਾਂ ਨੂੰ ਪੜ੍ਹਨ 'ਚ ਇੱਕ ਸ਼ਾਂਤ ਖੁਸ਼ੀ ਮਿਲੇਗੀ <3">I do write, occasionally, capturing fleeting thoughts, quiet observations, and the stories life weaves around me. I also, at times, wander into the realm of science, where curiosity tugs at my mind. These are my words, pieces of my journey, shared with you in the hope they resonate. You can find more of my writings under the posts of my online journal <a href='https://www.instagram.com/scarsandspades' target='_blank' style='color:#0077b5;'>scarsandspades</a>. I trust you will find a quiet joy in reading them <3</p>
+      <p data-en="I write, occasionally, capturing fleeting thoughts, quiet observations, and the stories life weaves around me. I also, at times, wander into the realm of science and maths, where curiosity tugs at my mind. These are my words, pieces of my journey, shared with you in the hope they resonate. You can find more of my writings under the posts of my online journal <a href='https://www.instagram.com/scarsandspades' target='_blank' style='color:#0077b5;'>scarsandspades</a>. I trust you will find a quiet joy in reading them <3" data-pa="ਮੈਂ, ਕਦੇ-ਕਦਾਈਂ, ਪਲ ਭਰ ਦੇ ਵਿਚਾਰਾਂ, ਸ਼ਾਂਤ ਨਿਰੀਖਣਾਂ, ਅਤੇ ਜ਼ਿੰਦਗੀ ਦੀਆਂ ਕਹਾਣੀਆਂ ਨੂੰ ਆਪਣੇ ਆਲੇ ਦੁਆਲੇ ਬੁਣਦਾ ਹੋਇਆ ਲਿਖਦਾ ਹਾਂ। ਮੈਂ ਕਈ ਵਾਰ ਵਿਗਿਆਨ ਅਤੇ ਗਣਿਤ ਦੇ ਖੇਤਰ ਵਿੱਚ ਵੀ ਘੁੰਮਦਾ ਹਾਂ, ਜਿੱਥੇ ਉਤਸੁਕਤਾ ਮੇਰੇ ਮਨ ਨੂੰ ਖਿੱਚਦੀ ਹੈ। ਇਹ ਮੇਰੇ ਸ਼ਬਦ ਹਨ, ਮੇਰੀ ਯਾਤਰਾ ਦੇ ਟੁਕੜੇ, ਤੁਹਾਡੇ ਨਾਲ ਇਸ ਉਮੀਦ ਵਿੱਚ ਸਾਂਝੇ ਕੀਤੇ ਗਏ ਹਨ ਕਿ ਉਹ ਗੂੰਜਣਗੇ। ਤੁਸੀਂ ਮੇਰੀਆਂ ਹੋਰ ਲਿਖਤਾਂ ਮੇਰੇ ਆਨਲਾਈਨ ਜਰਨਲ <a href='https://www.instagram.com/scarsandspades' target='_blank' style='color:#0077b5;'>scarsandspades</a> ਵਿੱਚ ਲੱਭ ਸਕਦੇ ਹੋ। ਮੈਨੂੰ ਭਰੋਸਾ ਹੈ ਕਿ ਤੁਹਾਨੂੰ ਇਹਨਾਂ ਨੂੰ ਪੜ੍ਹਨ 'ਚ ਇੱਕ ਸ਼ਾਂਤ ਖੁਸ਼ੀ ਮਿਲੇਗੀ <3">I write, occasionally, capturing fleeting thoughts, quiet observations, and the stories life weaves around me. I also, at times, wander into the realm of science and maths, where curiosity tugs at my mind. These are my words, pieces of my journey, shared with you in the hope they resonate. You can find more of my writings under the posts of my online journal <a href='https://www.instagram.com/scarsandspades' target='_blank' style='color:#0077b5;'>scarsandspades</a>. I trust you will find a quiet joy in reading them <3</p>
       <div class="hex-grid">
         <!-- Row 1 -->
         <div class="hex filled-1"></div>
-          
+
         <!-- Row 2 -->
         <div class="hex">
           <a href="https://medium.com/@jaskeensingh/introduction-to-p-adic-numbers-where-infinty-goes-backwards-dd22d1886429" target='_blank'>p-adic Numbers</a>
@@ -78,7 +80,7 @@
           <a href="blog-post-2.html">Blog Post 2</a>
         </div>
         <div class="hex filled-3"></div>
-          
+
         <!-- Row 3 -->
         <div class="hex">
           <a href="blog-post-3.html">Blog Post 3</a>
@@ -91,8 +93,8 @@
         <!-- Row 4 -->
         <div class="hex filled-5"></div>
       </div>
-    </section> 
-    
+    </section>
+
     <section id="projects" class="projects-section">
       <h3 data-en="Projects" data-pa="ਪ੍ਰੋਜੈਕਟ">Projects</h3>
       <p class="center-text" data-en="Here are some projects I've worked on. You can find more on my <a href='https://github.com/jaskeensingh' target='_blank' style='color:#0077b5;'>GitHub</a>." data-pa="ਇਹ ਕੁਝ ਪ੍ਰੋਜੈਕਟ ਹਨ ਜਿਨ੍ਹਾਂ 'ਤੇ ਮੈਂ ਕੰਮ ਕੀਤਾ ਹੈ। ਤੁਸੀਂ ਹੋਰ ਮੇਰੇ <a href='https://github.com/jaskeensingh' target='_blank' style='color:#0077b5;'>GitHub</a> ਤੇ ਵੇਖ ਸਕਦੇ ਹੋ।">Here are some projects I've worked on. You can find more on my <a href='https://github.com/jaskeensingh' target='_blank' style='color:#0077b5;'>GitHub</a>.</p>
@@ -100,7 +102,7 @@
 
         <div class="project-card">
           <div class="project-image">
-            <img src="images/Projects/IMG_1303.webp" alt="Project 1" loading="lazy">
+            <img src="images/Projects/IMG_1303.webp" alt="Project 1" loading="lazy" decoding="async" width="600" height="400">
           </div>
           <div class="project-content">
             <h4 data-en="Kaiju Taxonomy Classification Pipeline" data-pa="Kaiju ਟੈਕਸੋਨੋਮੀ ਕਲਾਸੀਫਿਕੇਸ਼ਨ ਪਾਈਪਲਾਈਨ">Kaiju Taxonomy Classification Pipeline</h4>
@@ -110,10 +112,10 @@
             </div>
           </div>
         </div>
-        
+
         <div class="project-card">
           <div class="project-image">
-            <img src="images/Projects/denoiser.webp" alt="Project 1" loading="lazy">
+            <img src="images/Projects/denoiser.webp" alt="Project 1" loading="lazy" decoding="async" width="600" height="400">
           </div>
           <div class="project-content">
             <h4 data-en="Image Denoiser and Segmentation" data-pa="ਇਮੇਜ ਡਿਨੋਇਜ਼ਰ ਅਤੇ ਵਿਭਾਜਨ">Image Denoiser and Segmentation</h4>
@@ -123,10 +125,10 @@
               </div>
           </div>
         </div>
-        
+
         <div class="project-card">
           <div class="project-image">
-            <img src="https://images.pexels.com/photos/3183170/pexels-photo-3183170.jpeg" alt="Project 1">
+            <img src="https://images.pexels.com/photos/3183170/pexels-photo-3183170.jpeg" alt="Project 1" loading="lazy" decoding="async" width="600" height="400">
           </div>
           <div class="project-content">
             <h4 data-en="GenAI and Computer Vision Video Searcher" data-pa="GenAI ਅਤੇ ਕੰਪਿਊਟਰ ਵਿਜ਼ਨ ਨਾਲ ਵੀਡੀਓ ਖੋਜਣਾ">GenAI and Computer Vision Video Searcher</h4>
@@ -139,37 +141,37 @@
         </div>
       </div>
     </section>
-    
+
     <section id="gallery">
       <h3 data-en="Gallery" data-pa="ਗੈਲਰੀ">Gallery</h3>
-      <p data-en="I wander through time, capturing moments that whisper secrets of the past and murmur dreams of tomorrow. Each frame holds a fragment of life’s poetry, a silent ode to the stories only the beholder can tell. Here are glimpses of the world as I see it — hope they resonate with you." data-pa="ਮੈਂ ਸਮਾਂ ਦੇ ਰਾਹੀਂ ਯਾਤਰਾ ਕਰਦਾ ਹਾਂ, ਉਹ ਪਲ ਕੈਦ ਕਰਦਾ ਹਾਂ ਜੋ ਬੀਤੇ ਹੋਏ ਰਾਜ਼ ਦੱਸਦੇ ਹਨ ਅਤੇ ਭਵਿੱਖ ਦੇ ਸੁਪਨੇ ਸੁਣਾਉਂਦੇ ਹਨ। ਹਰ ਤਸਵੀਰ ਜੀਵਨ ਦੀ ਕਵਿਤਾ ਦਾ ਇਕ ਅੰਸ਼ ਹੈ, ਐਸੀ ਕਹਾਣੀਆਂ ਲਈ ਜੋ ਸਿਰਫ਼ ਵੇਖਣ ਵਾਲਾ ਬਿਆਨ ਕਰ ਸਕਦਾ ਹੈ। ਇਹ ਜਹਾਨ ਦੀਆਂ ਝਲਕਾਂ ਹਨ, ਜਿਵੇਂ ਕਿ ਮੈਂ ਇਹਨੂੰ ਵੇਖਦਾ ਹਾਂ — ਆਸ ਹੈ ਇਹ ਤੁਹਾਡੇ ਦਿਲ ਨੂੰ ਵੀ ਛੂਣਗੀਆਂ">I wander through time, capturing moments that whisper secrets of the past and murmur dreams of tomorrow. Each frame holds a fragment of life’s poetry, a silent ode to the stories only the beholder can tell. Here are glimpses of the world as I see it — hope they resonate with you.</p>
+      <p data-en="What is life but a web of memories we weave and keep with ourselves? And what is life if you can't share these memories with others? Pictures, I feel, narrate stories with a depth and meaning beyond words. So here I share my memories, the photos I keep taking as memoirs in this journey of life." data-pa="ਜ਼ਿੰਦਗੀ ਕੀ ਹੈ ਸਿਵਾਏ ਯਾਦਾਂ ਦੇ ਜਾਲ ਦੇ ਜੋ ਅਸੀਂ ਬੁਣਦੇ ਅਤੇ ਆਪਣੇ ਨਾਲ ਰੱਖਦੇ ਹਾਂ? ਅਤੇ ਉਹ ਵੀ ਕੈਸੀ ਜ਼ਿੰਦਗੀ ਹੈ, ਜੇ ਤੁਸੀਂ ਇਨ੍ਹਾਂ ਯਾਦਾਂ ਨੂੰ ਦੂਜਿਆਂ ਨਾਲ ਸਾਂਝਾ ਨਾ ਕਰ ਸਕੋ? ਮੈਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤਸਵੀਰਾਂ ਸ਼ਬਦਾਂ ਤੋਂ ਪਰੇ ਡੂੰਘਾਈ ਅਤੇ ਅਰਥ ਵਾਲੀਆਂ ਕਹਾਣੀਆਂ ਬਿਆਨ ਕਰਦੀਆਂ ਹਨ। ਇਸ ਲਈ ਮੈਂ ਇੱਥੇ ਆਪਣੀਆਂ ਯਾਦਾਂ ਸਾਂਝੀਆਂ ਕਰਦਾ ਹਾਂ, ਉਹ ਫੋਟੋਆਂ ਜੋ ਮੈਂ ਜ਼ਿੰਦਗੀ ਦੇ ਇਸ ਸਫ਼ਰ ਵਿੱਚ ਯਾਦਾਂ ਵਜੋਂ ਲੈਂਦਾ ਰਹਿੰਦਾ ਹਾਂ।">What is life but a web of memories we weave and keep with ourselves? And what is life if you can't share these memories with others? Pictures, I feel, narrate stories with a depth and meaning beyond words. So here I share my memories, the photos I keep taking as memoirs in this journey of life.</p>
       <div class="carousel">
-        <div class="card" style="background-image: url('images/Gallery/IMG_1423.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_2019.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_2950.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_3068.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_4482.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_5894.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_5411.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_5554.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_5598.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_5336.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_5930.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_6043.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_6123.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_6215.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_6357.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_6404.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_6596.webp')"></div>
-        <div class="card" style="background-image: url('images/Gallery/IMG_6832.webp')"></div>
+  <div class="card" data-bg="images/Gallery/IMG_1423.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_2019.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_2950.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_3068.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_4482.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_5894.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_5411.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_5554.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_5598.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_5336.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_5930.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_6043.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_6123.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_6215.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_6357.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_6404.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_6596.webp"></div>
+  <div class="card" data-bg="images/Gallery/IMG_6832.webp"></div>
       </div>
     </section>
   </main>
-  
+
   <footer>
     <section id="contact">
       <h3 data-en="Contact" data-pa="ਸੰਪਰਕ">Contact</h3>
-      <p data-en="Do reach out to me at <a href='mailto:jaskeensingh22@gmail.com' style='color:#0077b5;'>jaskeensingh22@gmail.com</a> regarding anything interesting :)" data-pa="ਕੋਈ ਵੀ ਦਿਲਚਸਪ ਗੱਲ ਲਈ ਮੈਨੂੰ <a href='mailto:jaskeensingh22@gmail.com' style='color:#0077b5;'>jaskeensingh22@gmail.com</a> 'ਤੇ ਸੰਪਰਕ ਕਰੋ :)"> Do reach out to me at <a href="mailto:jaskeensingh22@gmail.com" style='color:#0077b5;'>jaskeensingh22@gmail.com</a> regarding anything interesting :)</p>
+      <p data-en="Do reach out to me at <a href='mailto:jaskeensingh22@gmail.com' style='color:#0077b5;'>jaskeensingh22@gmail.com</a> regarding anything interesting. Never think twice :)" data-pa="ਕੋਈ ਵੀ ਦਿਲਚਸਪ ਗੱਲ ਲਈ ਮੈਨੂੰ <a href='mailto:jaskeensingh22@gmail.com' style='color:#0077b5;'>jaskeensingh22@gmail.com</a> 'ਤੇ ਬੇਝਿਝਕ ਸੰਪਰਕ ਕਰੋ :)"> Do reach out to me at <a href="mailto:jaskeensingh22@gmail.com" style='color:#0077b5;'>jaskeensingh22@gmail.com</a> regarding anything interesting. Never think twice :)</p>
       <div class="social-links">
         <a href="https://github.com/jaskeensingh" target='_blank' class="social-icon"><i class="fa-brands fa-github"></i></a>
         <a href="https://www.linkedin.com/in/jaskeensingh" target='_blank' class="social-icon"><i class="fab fa-linkedin"></i></a>
@@ -180,10 +182,11 @@
     </section>
 
     <div class="footer-bottom">
-      <p data-en="&copy; 2024 Jaskeen Singh. All rights reserved." data-pa="&copy; 2024 ਜਸਕੀਨ ਸਿੰਘ। ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।">&copy; 2024 Jaskeen Singh. All rights reserved.</p>
+      <p data-en="&copy; 2025 Jaskeen Singh. All rights reserved." data-pa="&copy; 2025 ਜਸਕੀਨ ਸਿੰਘ। ਸਾਰੇ ਹੱਕ ਰਾਖਵੇਂ ਹਨ।">&copy; 2025 Jaskeen Singh. All rights reserved.</p>
     </div>
   </footer>
-  
+
+  <script src="particles.js"></script>
   <script src="script.js"></script>
 
 </body>

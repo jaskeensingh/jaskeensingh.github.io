@@ -18,6 +18,17 @@ body {
     -webkit-text-size-adjust: 100%; /* Prevents auto-scaling */
 }
 
+/* Particle canvas base layer */
+#particle-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* behind everything */
+    background: var(--bg-color);
+    pointer-events: none; /* allow clicks through */
+}
+
 body.light-theme {
     --bg-color: #f0f0f0;
     --text-color: #000000;
@@ -265,6 +276,7 @@ body.light-theme header {
     height: 100vh; /* Automatically adjusts the height */
     object-fit: cover;
     border-radius: 20px;
+    background: #000; /* fallback */
 }
 
 .animated-text {
@@ -279,6 +291,7 @@ body.light-theme header {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     opacity: 0;
     transition: opacity 1s ease;
+    will-change: opacity;
 }
 
 .visible {
@@ -320,7 +333,7 @@ body.light-theme header {
         height: 60vh; /* Reduced height for tablets */
         margin-top: 20px; /* Add space for the header */
     }
-    
+
     .video-container {
         width: 100%;
         height: auto;
@@ -341,7 +354,7 @@ body.light-theme header {
         padding: 2rem 0; /* Add some padding top and bottom */
         margin-top: 50px; /* Add space for the header */
     }
-    
+
     .video-container {
         width: 100%;
         height: auto;
@@ -423,7 +436,7 @@ section {
     gap: 8px 20px; /* Vertical and horizontal gap */
     justify-content: center;
 }
-  
+
 .hex {
     width: 140px;
     height: 140px;
@@ -456,7 +469,7 @@ section {
 .hex.filled-3 { background-image: url(https://images.pexels.com/photos/28435070/pexels-photo-28435070/free-photo-of-ancient-rock-tombs-in-dalyan-turkiye.jpeg); }
 .hex.filled-4 { background-image: url(https://images.pexels.com/photos/27220731/pexels-photo-27220731/free-photo-of-a-bee-is-on-a-sunflower-in-a-field.jpeg); }
 .hex.filled-5 { background-image: url(https://images.pexels.com/photos/6471779/pexels-photo-6471779.jpeg); }
- 
+
 /* Ensure hover effects persist for hexagon links */
 .hex a {
     display: flex;
@@ -470,7 +483,7 @@ section {
     padding: 10px;
     font-size: 14px;
 }
-  
+
 /* Explicit placement for all hexagons */
 .hex:nth-child(1) { grid-column: 2; grid-row: 1; transform: translateY(5%); }
 .hex:nth-child(2) { grid-column: 1; grid-row: 2; transform: translateX(30%); }
@@ -488,12 +501,12 @@ section {
         grid-auto-rows: 92px;
         gap: 6px 15px;
     }
-  
+
     .hex {
         width: 110px;
         height: 110px;
     }
-  
+
     .hex:nth-child(1) { grid-column: 2; grid-row: 1; transform: translateX(-60%) translateY(5%); }
     .hex:nth-child(2) { grid-column: 1; grid-row: 2; transform: translateX(-28%); }
     .hex:nth-child(3) { grid-column: 3; grid-row: 2; transform: translateX(-92%); }
@@ -513,17 +526,17 @@ section {
         gap: 4px 10px;
         padding: 10px;
     }
-  
+
     .hex {
         width: 60px;
         height: 60px;
     }
-  
+
     .hex a {
         font-size: 8px;
         padding: 5px;
     }
-  
+
     /* Mobile-specific positioning */
     .hex:nth-child(1) { grid-column: 2; grid-row: 1; transform: translateX(-150%) translateY(40%); }
     .hex:nth-child(2) { grid-column: 1; grid-row: 2; transform: translateX(-90%) translateY(5%); }
@@ -609,6 +622,14 @@ section {
 
 .project-card:hover .project-image img {
     transform: scale(1.05);
+}
+
+/* Performance hints */
+.project-image img { will-change: transform; }
+.card { will-change: transform, opacity; }
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
 }
 
 .project-content {
@@ -743,36 +764,36 @@ section {
     .carousel {
       height: 450px;
     }
-  
+
     .card {
       width: 270px;
       height: 370px;
     }
-  
+
     .card[data-position="0"] {
       transform: translateX(0) scale(0.8);
       z-index: 3;
       opacity: 1;
     }
-  
+
     .card[data-position="1"] {
       transform: translateX(180px) scale(0.6) rotate(4deg);
       z-index: 2;
       opacity: 0.9;
     }
-  
+
     .card[data-position="-1"] {
       transform: translateX(-180px) scale(0.6) rotate(-4deg);
       z-index: 2;
       opacity: 0.9;
     }
-  
+
     .card[data-position="2"] {
       transform: translateX(300px) scale(0.4) rotate(8deg);
       z-index: 1;
       opacity: 0.7;
     }
-  
+
     .card[data-position="-2"] {
       transform: translateX(-300px) scale(0.4) rotate(-8deg);
       z-index: 1;
@@ -795,36 +816,36 @@ section {
       height: 300px;
       padding: 0 10px;
     }
-  
+
     .card {
       width: 200px;
       height: 290px;
     }
-  
+
     .card[data-position="0"] {
       transform: translateX(0) scale(0.5);
       z-index: 3;
       opacity: 1;
     }
-  
+
     .card[data-position="1"] {
       transform: translateX(80px) scale(0.4) rotate(6deg);
       z-index: 2;
       opacity: 0.8;
     }
-  
+
     .card[data-position="-1"] {
       transform: translateX(-80px) scale(0.4) rotate(-6deg);
       z-index: 2;
       opacity: 0.8;
     }
-  
+
     .card[data-position="2"] {
         transform: translateX(130px) scale(0.3) rotate(8deg);
         z-index: 1;
         opacity: 0.7;
     }
-    
+
     .card[data-position="-2"] {
         transform: translateX(-130px) scale(0.3) rotate(-8deg);
         z-index: 1;
@@ -966,7 +987,7 @@ body.light-theme #contact a:hover {
 }
 /* Centering the footer itself */
 footer {
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: center; /* Center align the footer items */
     padding: 1rem; /* Add some padding */

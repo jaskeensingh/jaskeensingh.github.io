@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000); // Delay to match the fade-out time
     }
 
-    // Set interval to toggle every 2 seconds
-    setInterval(toggleName, 3000);
+    // Toggle name every 3s (already defined) - keep reference for potential cancel
+    const nameInterval = setInterval(toggleName, 3000);
 
     // Carousel functionality
     const carousel = document.querySelector('.carousel');
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCardPosition(card, position) {
         // Normalize the position for circular rotation
         let normalizedPosition = position;
-        
+
         // Wrap the positions so they rotate around
         while (normalizedPosition < -(totalCards / 2)) {
             normalizedPosition += totalCards;
@@ -83,36 +83,36 @@ document.addEventListener('DOMContentLoaded', () => {
         while (normalizedPosition > (totalCards / 2)) {
             normalizedPosition -= totalCards;
         }
-        
+
         // Calculate the visible position
         let displayPosition = Math.max(Math.min(normalizedPosition, 3), -3);
-        
+
         // Update the card's attributes and style for visible positioning
         card.setAttribute('data-position', displayPosition.toString());
         card.setAttribute('data-actual-position', normalizedPosition.toString());
-        
+
         // Make sure the far cards don't disappear but become smaller and less opaque
         if (Math.abs(displayPosition) <= 3) {
             card.style.opacity = '1';
             card.style.display = 'block';
         }
     }
-    
+
 
     function rotateCarousel(direction) {
         if (isAnimating) return;
         isAnimating = true;
-    
+
         // Get current positions
         const currentPositions = cards.map(card => parseInt(card.getAttribute('data-actual-position') || '0'));
-    
+
         // Update all positions
         cards.forEach((card, index) => {
             const currentPosition = currentPositions[index];
             const newPosition = currentPosition + (direction === 'left' ? 1 : -1);
             updateCardPosition(card, newPosition);
         });
-    
+
         setTimeout(() => {
             isAnimating = false;
             cards.forEach(card => {
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             rotateCarousel(e.key === 'ArrowLeft' ? 'left' : 'right');
         }
-    });
+    }, { passive: true });
 
     // Touch support
     let touchStartX = 0;
@@ -160,13 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].clientX;
         const difference = touchStartX - touchEndX;
-        
+
         if (Math.abs(difference) > 50) {
             rotateCarousel(difference > 0 ? 'left' : 'right');
         }
     }, { passive: true });
 
     // Handle continuous rotation with proper tracking
+    // Less frequent sync (every 1.5s) to reduce layout work
     setInterval(() => {
         if (!isAnimating) {
             cards.forEach(card => {
@@ -174,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateCardPosition(card, pos);
             });
         }
-    }, 500);
+    }, 1500);
 
     // Initialize
     initializeCarousel();
@@ -183,60 +184,75 @@ document.addEventListener('DOMContentLoaded', () => {
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(initializeCarousel, 100);
-    });
+        resizeTimeout = setTimeout(initializeCarousel, 120);
+    }, { passive: true });
 
     // Initialize other functionalities (smooth scrolling, etc.)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href'))?.scrollIntoView({
-                behavior: 'smooth'
-            });
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target){
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, { passive: false });
+    });
+
+    // Optional horizontal project carousel (guard missing elements)
+    if (carousel_1 && prevButton && nextButton) {
+        let scrollPosition = 0;
+        const cardWidth = 320; // card width + gap
+        const visibleCards = 2;
+
+        function updateCarousel() {
+            carousel_1.style.transform = `translateX(-${scrollPosition}px)`;
+            prevButton.disabled = scrollPosition === 0;
+            const maxScroll = (carousel_1.children.length - visibleCards) * cardWidth;
+            nextButton.disabled = scrollPosition >= maxScroll;
+        }
+
+        nextButton.addEventListener('click', () => {
+            const maxScroll = (carousel_1.children.length - visibleCards) * cardWidth;
+            if (scrollPosition < maxScroll) {
+                scrollPosition += cardWidth;
+                updateCarousel();
+            }
         });
-    });
-
-    // Set the initial scroll position
-    let scrollPosition = 0;
-    const cardWidth = 320; // card width + gap
-    const visibleCards = 2; // Number of cards visible at once
-
-    function updateCarousel() {
-        carousel_1.style.transform = `translateX(-${scrollPosition}px)`;
-        
-        // Enable/disable buttons based on scroll position
-        prevButton.disabled = scrollPosition === 0;
-
-        // Calculate the maximum scroll position based on visible cards
-        const maxScroll = (carousel_1.children.length - visibleCards) * cardWidth;
-        nextButton.disabled = scrollPosition >= maxScroll;
-        
-    }
-    // Next button click handler
-    nextButton.addEventListener('click', () => {
-        const maxScroll = (carousel_1.children.length - visibleCards) * cardWidth;
-                if (scrollPosition < maxScroll) {
-                    scrollPosition += cardWidth;
-                    updateCarousel();
-                }
-    });
-    // Previous button click handler
-    prevButton.addEventListener('click', () => {
-        if (scrollPosition > 0) {
-            scrollPosition -= cardWidth;
-            scrollPosition = Math.max(0, scrollPosition);
-            updateCarousel();
-        }
-    });
-    // Initial button state
-    updateCarousel();
-
-    // Update on window resize
-    window.addEventListener('resize', () => {
-        // Reset position when switching to mobile view
-        if (window.innerWidth <= 800) {
-            scrollPosition = 0;
-        }
+        prevButton.addEventListener('click', () => {
+            if (scrollPosition > 0) {
+                scrollPosition = Math.max(0, scrollPosition - cardWidth);
+                updateCarousel();
+            }
+        });
         updateCarousel();
-    });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 800) scrollPosition = 0;
+            updateCarousel();
+        }, { passive: true });
+    }
+
+    // Lazy load gallery card backgrounds using IntersectionObserver
+    const galleryObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                const el = entry.target;
+                const bg = el.getAttribute('data-bg');
+                if(bg){
+                    el.style.backgroundImage = `url('${bg}')`;
+                    el.removeAttribute('data-bg');
+                }
+                galleryObserver.unobserve(el);
+            }
+        });
+    }, { rootMargin: '200px 0px' }) : null;
+
+    if(galleryObserver){
+        document.querySelectorAll('.carousel .card[data-bg]').forEach(card=>galleryObserver.observe(card));
+    } else {
+        // fallback: load immediately
+        document.querySelectorAll('.carousel .card[data-bg]').forEach(card=>{
+            card.style.backgroundImage = `url('${card.getAttribute('data-bg')}')`;
+            card.removeAttribute('data-bg');
+        });
+    }
 });
