@@ -141,13 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Carousel nav buttons
+    const navLeft = document.querySelector('.carousel-nav--left');
+    const navRight = document.querySelector('.carousel-nav--right');
+    if (navLeft) navLeft.addEventListener('click', () => rotateCarousel('left'));
+    if (navRight) navRight.addEventListener('click', () => rotateCarousel('right'));
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
             e.preventDefault();
             rotateCarousel(e.key === 'ArrowLeft' ? 'left' : 'right');
         }
-    }, { passive: true });
+    });
 
     // Touch support
     let touchStartX = 0;
@@ -192,8 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            if(target){
-              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }, { passive: false });
     });
@@ -234,10 +240,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lazy load gallery card backgrounds using IntersectionObserver
     const galleryObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
                 const el = entry.target;
                 const bg = el.getAttribute('data-bg');
-                if(bg){
+                if (bg) {
                     el.style.backgroundImage = `url('${bg}')`;
                     el.removeAttribute('data-bg');
                 }
@@ -246,13 +252,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { rootMargin: '200px 0px' }) : null;
 
-    if(galleryObserver){
-        document.querySelectorAll('.carousel .card[data-bg]').forEach(card=>galleryObserver.observe(card));
+    if (galleryObserver) {
+        document.querySelectorAll('.carousel .card[data-bg]').forEach(card => galleryObserver.observe(card));
     } else {
         // fallback: load immediately
-        document.querySelectorAll('.carousel .card[data-bg]').forEach(card=>{
+        document.querySelectorAll('.carousel .card[data-bg]').forEach(card => {
             card.style.backgroundImage = `url('${card.getAttribute('data-bg')}')`;
             card.removeAttribute('data-bg');
         });
     }
+
+    // Scroll progress bar
+    const scrollProgressEl = document.querySelector('.scroll-progress');
+    scrollProgressEl.style.opacity = '0';
+    function updateScrollProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
+        scrollProgressEl.style.transform = `scaleX(${scrollPercent})`;
+        scrollProgressEl.style.opacity = scrollTop > 5 ? '1' : '0';
+    }
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // Section reveal animations
+    const sections = document.querySelectorAll('#about, #blog, #projects, #gallery, #contact');
+    sections.forEach(sec => sec.classList.add('reveal-section'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    sections.forEach(sec => revealObserver.observe(sec));
 });
